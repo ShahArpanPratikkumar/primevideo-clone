@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Video Movies</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+        }
+
+           .main-nav {
+            margin-left: 25px;
+        }
+
+        .main-nav a {
+            color: var(--text-grey);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: var(--text-light);
+        }
+        .prime-dark-blue-bg {
+            background-color: #0F171E;
+        }
+        .prime-gold {
+            color: #FFC300;
+        }
+        /* Custom scrollbar for row overflow */
+        .poster-row {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .poster-row::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        .poster-card {
+            min-width: 250px; /* Base size for mobile */
+            max-width: 300px; /* Max size for desktop */
+            width: 200px;
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .poster-card:hover {
+            transform: scale(1.05);
+        }
+        .poster-image {
+            width: 100%;
+            aspect-ratio: 4/5; /* Aspect ratio common for movie posters */
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        /* Style for the main hero banner */
+        .hero-banner {
+            height: 60vh;
+            min-height: 400px;
+            background-size: cover;
+            background-position: top center;
+            position: relative;
+        }
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0));
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- 1. Header Navigation Bar -->
+    <header class="prime-dark-blue-bg border-b border-gray-800 fixed top-0 left-0 right-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center space-x-6">
+                <!-- Prime Video Logo Text/Icon -->
+                <div class="text-xl font-bold">prime video</div>
+                
+                <!-- Navigation Links -->
+                      <nav class="main-nav">
+            <a href="#" class="active">Home</a>
+            <a href="./prime.html">Movies</a>
+            <a href="#">Tv Shows</a>
+            <a href="#">Categories</a>
+        </nav>
+            </div>
+
+            <!-- Right: Search, Language, User, Sign-in -->
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-300 hover:text-white transition hidden md:block">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+                <div class="flex items-center text-sm font-medium text-gray-300 hover:text-white transition cursor-pointer">
+                    EN
+                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <button class="text-gray-300 hover:text-white transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                </button>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 rounded transition">
+                    Join Prime
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Main Hero Banner (Our Fault) -->
+    <main class="pt-16 min-h-screen bg-black">
+        <div class="hero-banner" style="background-image: url('https://i0.wp.com/thefutureoftheforce.com/wp-content/uploads/2025/09/8WhlNrtQdyUBnKrw5WBJnsDn1HE.jpg?fit=1024%2C576&ssl=1');">
+            <div class="hero-overlay absolute inset-0 z-10 p-4 sm:p-8 lg:p-12 flex flex-col justify-end">
+                <div class="max-w-xl mb-4">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <!-- Prime Icon -->
+                        <svg class="w-6 h-6 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.5l-5-5 1.41-1.41L11 14.6l7.59-7.59L20 8.5l-9 9z"/></svg>
+                        <span class="text-xs font-semibold text-white">prime</span>
+                    </div>
+
+                    <!-- Title -->
+                    <h1 class="text-6xl sm:text-7xl font-extrabold leading-none mb-4">
+                        Our Fault
+                    </h1>
+
+                    <!-- Language and Episodes -->
+                    <p class="text-sm font-semibold text-gray-300 mb-1">
+                        English | Hindi | Tamil | Telugu | Malayalam | Kannada
+                    </p>
+                    <p class="text-green-400 font-semibold mb-3">
+                        #3 in India
+                    </p>
+
+                    <!-- Description -->
+                    <p class="text-base text-gray-300 mb-6">
+                        At a wedding, Noah and Nick reunite post-breakup. After four years on different paths, can their love overcome...
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-4 items-center">
+                        <button class="bg-white text-black font-bold py-3 px-8 rounded-md hover:bg-gray-200 transition text-lg">
+                            Join Prime &bull; Watch now
+                        </button>
+                        <button class="bg-gray-800/80 p-3 rounded-full hover:bg-gray-700 transition">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        </button>
+                        <button class="bg-gray-800/80 p-3 rounded-full hover:bg-gray-700 transition">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </button>
+                    </div>
+
+                    <p class="mt-4 text-xs text-gray-400 flex items-center space-x-1">
+                        <svg class="w-3 h-3 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                        <span>Watch with a Prime membership</span>
+                    </p>
+                </div>
+            </div>
+            <!-- Pagination dots -->
+            <div class="absolute bottom-4 right-12 z-10 flex space-x-2">
+                <div class="w-2 h-2 rounded-full bg-white"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+            </div>
+        </div>
+
+        <!-- 3. Movie Rows -->
+        <div class="py-12 px-4 sm:px-8 lg:px-12">
+            
+            <!-- Row 1: Top TV -->
+            <div class="mb-10">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl sm:text-2xl font-bold">Top TV</h2>
+                    <a href="#" class="text-blue-500 text-sm font-semibold hover:text-blue-400 transition">See more ></a>
+                </div>
+                <div class="poster-row flex overflow-x-scroll space-x-4 pb-4">
+                    
+                    <!-- Two much  -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BODYyYTA5YTEtNDQ1NS00ZDg1LTgyMzQtZDFhOGI3NmZmZTRmXkEyXkFqcGc@._V1_.jpg" onerror="this.src='https://placehold.co/200x250/333/fff?text=OUR+FAULT'" alt="Two much Poster">
+  
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Panchayat -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BNjMwYWMxNjYtY2I2NC00OWE0LTg4MmQtMmI5ZGI2NzU4ODhiXkEyXkFqcGc@._V1_.jpg" alt="Panchayat Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                    
+                    <!--Farzi -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://image.tmdb.org/t/p/original/xk18m4n30TwDnWuaKdMf99K3KHV.jpg" alt="Farzi Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Mirzapur -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BZTFjMzMxZTUtYTMyNy00OWNhLTk4ODQtNGI1NjI1NjJhMzc3XkEyXkFqcGc@._V1_.jpg" alt="Mirzapur">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- The Summer I Turned Pretty -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BYjY0OWZkYjEtYzBmZC00NThhLWFjOGYtM2Q5NDA5MWJjZGVkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="The Summer I Turned Pretty">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>                    
+                    
+                    <!-- Paatal Lok  -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BOTdkYmMxMGEtYTgwYi00NjdjLWI4MTctYTg0OWZlMzU2NDk1XkEyXkFqcGc@._V1_.jpg" alt="Paatal lok Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: TMost popular on MX Player- Watch for free (From 191302.jpg) -->
+            <div class="mb-10">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl sm:text-2xl font-bold">Most popular on MX Player- Watch for free <svg class="w-5 h-5 ml-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></h2>
+                    <a href="#" class="text-blue-500 text-sm font-semibold hover:text-blue-400 transition">See more ></a>
+                </div>
+                <div class="poster-row flex overflow-x-scroll space-x-4 pb-4">
+                    <!-- 1. Jamnapaar -->
+                    <div class="poster-card relative">
+                        <span class="absolute text-7xl font-extrabold -left-4 top-1/4 opacity-10 text-white">1</span>
+                        <img class="poster-image" src="https://preview.redd.it/what-are-your-views-on-this-show-v0-v9gyey4k664d1.jpeg?auto=webp&s=ea26444ec67c26c2cb60a9e1c8f49ddb9deca05b" onerror="this.src='https://placehold.co/200x250/111/fff?text=PREMAM'" alt="Jamnapaar Poster">
+                        <span class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">TRENDING</span>
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Battle of Saragarhi -->
+                    <div class="poster-card relative">
+                        <span class="absolute text-7xl font-extrabold -left-4 top-1/4 opacity-10 text-white">2</span>
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BODZkNjZlNTctNWE5Yy00NGEyLWFjOTAtNzVjZTUzOGZhZDEwXkEyXkFqcGc@._V1_.jpg" alt="Battle of Saragarhi Poster">
+                        <span class="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">NEW MOVIE</span>
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 3. Our Fault -->
+                    <div class="poster-card relative">
+                        <span class="absolute text-7xl font-extrabold -left-4 top-1/4 opacity-10 text-white">3</span>
+                        <img class="poster-image" src="https://cdn.moviefone.com/image-assets/1156594/yzqHt4m1SeY9FbPrfZ0C2Hi9x1s.jpg?d=360x540&q=60" onerror="this.src='https://placehold.co/200x250/444/fff?text=OUR+FAULT'" alt="Our Fault Poster">
+                        <span class="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">NEW MOVIE</span>
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. Chhote Nawab -->
+                    <div class="poster-card relative">
+                        <span class="absolute text-7xl font-extrabold -left-4 top-1/4 opacity-10 text-white">4</span>
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BMTNkNzUyZjUtZGNkZC00ZmM4LWI0ZmUtZGM1OTQ2ZDA2ZDMyXkEyXkFqcGc@._V1_.jpg" alt="Chhote Nawab Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Coolie -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/dec7049c59e766dc58c8cb6c1984c4523be5ec4bbdaf4e3a544dfda87b98e13e.jpg" alt="Coolie">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>                    
+
+                    <!-- 5. Cicada -->
+                    <div class="poster-card relative">
+                        <span class="absolute text-7xl font-extrabold -left-4 top-1/4 opacity-10 text-white">5</span>
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/5679ad49384ba2b51fe5ea676b91da6e871a41fed33500c6ae209ccede1c6cb1.jpg" alt="Cicada Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: Watch in Your Language (From 191302.jpg) -->
+            <div class="mb-10">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl sm:text-2xl font-bold">Action and adventure movies</h2>
+                    <a href="#" class="text-blue-500 text-sm font-semibold hover:text-blue-400 transition">See more ></a>
+                </div>
+                <div class="poster-row flex overflow-x-scroll space-x-4 pb-4">
+                    <!-- Madhrasi -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/746e4cf3bbf569c561c83eb3d8f56ecd3f8006ed7e56d0d7bd3b537ad6b054a3.jpg" alt="Madhrasi Poster">
+                        <span class="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">NEW MOVIE</span>
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Kantara -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://i.redd.it/fs7sdc4umr1b1.jpg" alt="Kantara Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- K.G.F -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/0978dc3775492a124027b21df5153ab61b4c90cc518cbe126ebb3769d34640d5.jpg" alt="K.G.F Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Thanal -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BODZkNjZlNTctNWE5Yy00NGEyLWFjOTAtNzVjZTUzOGZhZDEwXkEyXkFqcGc@._V1_.jpg" alt="Thanal Poster">
+                        <span class="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">NEW MOVIE</span>
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Mission: Impossible -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/f5af184404f22183d9511e2baff600f18d32277ed826ff23a815a9129d3c8f2b.jpg" alt="Mission: Impossible">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>                    
+
+                    <!-- Thuppaakki Thulasi -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/8aee08c852973dc5f2cd9f38767bdb0d2fd7dd1281e60b3bc3de5310cbea0d2b.jpg" alt="Thuppaakki Thulasi Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 4: Recommended with subsrciptions (From 191302.jpg) -->
+            <div class="mb-10">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl sm:text-2xl font-bold">Mystery and thriller movies</h2>
+                    <a href="#" class="text-blue-500 text-sm font-semibold hover:text-blue-400 transition">See more ></a>
+                </div>
+                <div class="poster-row flex overflow-x-scroll space-x-4 pb-4">
+                    <!-- Pale Moon  -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://image.tmdb.org/t/p/original/5Z9ZU7modHZSDFfbE1b1xKHpwXP.jpg" alt="Pale Moon Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- S Line -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://images.justwatch.com/poster/332742283/s166/season-1" alt="S Line Poster">
+                        <span class="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">NEW MOVIE</span>
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Kabul -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BZGJmNDUzZWQtOGNkYi00ODVmLTliYzItMjE5ZmNlNzQ1OTI0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Kabul Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- High School Return of a Gangster -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BZTUzZDJmZGYtMGVmNC00MjFmLTgyYzUtOWE3OWNjMjlkNzA5XkEyXkFqcGc@._V1_.jpg" alt="High School Return of a Gangster Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>                    
+                    
+
+
+                    <!-- Weapons -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/172f8a6a64a8acd12e4d1e31610dc5d98a56b8dd6e3ca614d42643a3820cc337.jpg" alt="Weapons">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>                    
+                    
+                    <!-- Kavalai Vendam -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="data:image/jpeg;base64,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" alt="Naruto Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 5: Romance Movies (From 191249.jpg) -->
+            <div class="mb-10">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl sm:text-2xl font-bold">Romantic Comedies</h2>
+                    <a href="#" class="text-blue-500 text-sm font-semibold hover:text-blue-400 transition">See more ></a>
+                </div>
+                <div class="poster-row flex overflow-x-scroll space-x-4 pb-4">
+                    <!-- Materialists -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/f4782ac9db23e12d4ca1cffd74867f621ff4712b11d0d1c110fe9f8f256e9ddf.jpg" onerror="this.src='https://placehold.co/200x250/333/fff?text=TERI+BAATON'" alt="bby girl Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Single -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/30940af7d4428a34e794a89e939ea7f190af161d8c10292c42d8003b922902d9.jpg" alt="Single Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Oh,Hi! -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/4/4f/Stree_-_2018_Movie_Poster.jpg" alt="Stree  Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Heart Eyes-->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjzaMRmxOd_dySwifykYDUcf0SiUK90eKvTw&s" alt="Heart Eyes Poster">
+                        <!-- Pop-up Box simulation, shown overlaid on the image, hidden by default for simplicity -->
+                        <div class="absolute inset-0 bg-black/80 flex items-center justify-center p-2 rounded-lg opacity-0 hover:opacity-100 transition duration-300">
+                             <div class="text-left">
+                                <h4 class="text-base font-bold mb-1">Heart-eyes</h4>
+                                <div class="flex space-x-2 mb-2">
+                                    <button class="bg-gray-700 p-1 rounded-full"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg></button>
+                                    <button class="bg-gray-700 p-1 rounded-full"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>
+                                </div>
+                                <p class="text-xs text-gray-400 mb-1 flex items-center">
+                                    <svg class="w-3 h-3 prime-gold mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                                    Watch with a Prime membership
+                                </p>
+                                <p class="text-xs font-semibold mb-1">2025 &bull; 2 h 2 min &bull; U/A 16+</p>
+                                <p class="text-xs text-gray-300">Race against time unfolds as a 38-year-old bachelor desperately searches for his destined wife,...</p>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Housefull 5 -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BZmIzMThjNTYtNjkwZi00NmM3LTliNGItZWIxYTUwMGU1YzM0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Housefull 5">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>   
+
+
+                    <!-- You're Cordially Invited -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://upload.wikimedia.org/wikipedia/en/9/9e/You%27re_Cordially_Invited_film_poster.jpg" alt="You're Cordially Invited">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 6: Shop: Rent New Movies (From 191249.jpg) -->
+            <div class="mb-10">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl sm:text-2xl font-bold">Shop: Rent New Movies</h2>
+                    <a href="#" class="text-blue-500 text-sm font-semibold hover:text-blue-400 transition">See more ></a>
+                </div>
+                <div class="poster-row flex overflow-x-scroll space-x-4 pb-4">
+                    <!-- Baaghi 4 -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BNGIyOTQwMTgtNjdlMi00YWE4LTg4MTgtZjc2ODI0OGRlOWQzXkEyXkFqcGc@._V1_.jpg" alt="Baaghi 4 Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- The Conjuring 4 -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/23172ccff62c769fa891268514299de5128299d2b10e399240a963ee95bd4390.jpg" alt="The Conjuring  Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- A Big Bold Beautiful Journey -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://images.scentregroup.io/image/fetch/q_auto,w_1200,f_auto,dpr_auto/https://res.cloudinary.com/scentre-group-au/image/upload/ukz4azlvn7sbmn4tzjnt" alt="A Big Bold Beautiful Journey Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Nobody 2 -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/0401bf08a955b5ae95f44315c8170a184cdd843bd7552bd7a8d46894595bd6f3.jpg" alt="Nobody 2">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>                    
+                    
+                    <!-- The jester-2 -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BODc0NGI2NDItZGI2Yy00YzRhLTkwMDYtZTViMTRlMGE3MzFkXkEyXkFqcGc@._V1_.jpg" alt="The jester-2">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    
+
+                    <!-- Bad Guys -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/baeab5aae2ea1f781c3af12ab41137feeadad4cd9904bf24a11361e87b6c5c99.jpg" alt="Bad Guys Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Row 7: Latest movies (From 191249.jpg) -->
+            <div class="mb-10">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl sm:text-2xl font-bold">Latest movies</h2>
+                    <a href="#" class="text-blue-500 text-sm font-semibold hover:text-blue-400 transition">See more ></a>
+                </div>
+                <div class="poster-row flex overflow-x-scroll space-x-4 pb-4">
+                    <!-- Param Sundari -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BYjBhNDMyYWItMmYyMC00ZjMwLWE3MmUtZGMwZWM0ZWExYjVkXkEyXkFqcGc@._V1_.jpg" alt="param sundari Poster">
+                        
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Arjun Chakraborty -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/1445ca0c1bb4b45d398ea58758c661d4f99512c1c73b68575cf36cfb0148a573.png" alt="Arjun Chakraborty Poster">
+                        <span class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">TRENDING</span>
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Bin Lagnaachi Goshta -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/M/MV5BNDA4YTU4MWEtODlhMi00ZDBhLWIzZDMtM2QxZjVmN2I5Mjk2XkEyXkFqcGc@._V1_.jpg" alt="Bin Lagnaachi Goshta Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- The Bikeriders -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/c294b7adf667cbe9f053a7e44b10b6a71c22491f54a4cf6dd74cb22a3218f35a.jpg" alt="The Bikeriders Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+
+                    <!-- Fear Below -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/bbe70209e122bead2d80c18eb8c4bf8fa828881c6ba0e4a5d6fe678a2913efc8.jpg" alt="Fear Below Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>                    
+
+                    
+
+                    <!-- The Badboy and Me -->
+                    <div class="poster-card relative">
+                        <img class="poster-image" src="https://m.media-amazon.com/images/S/pv-target-images/a14c76d63fd3428f017d11bad786e1b7de53756391d88f37e07ad75947b6ce8e.jpg" alt="The Badboy and Me Poster">
+                        <div class="absolute bottom-2 left-2 flex items-center space-x-1">
+                            <svg class="w-4 h-4 prime-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                            <span class="text-xs font-semibold text-white">prime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- 4. Footer -->
+    <footer class="prime-dark-blue-bg border-t border-gray-800 py-12 text-sm text-center">
+        <div class="flex flex-col items-center">
+            
+            <!-- Prime Video Logo (Center) -->
+            <div class="text-3xl font-bold mb-4">prime video</div>
+
+            <!-- Footer Links -->
+            <div class="space-x-4 mb-4 text-gray-400">
+                <a href="#" class="hover:text-white transition">Terms and Privacy Notice</a>
+                <a href="#" class="hover:text-white transition">Send us feedback</a>
+                <a href="#" class="hover:text-white transition">Help</a>
+            </div>
+
+            <!-- Copyright -->
+            <p class="text-gray-400">© 1996-2025, Amazon.com, Inc. or its affiliates</p>
+        </div>
+    </footer>
+
+</body>
+</html>
