@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Video - Watch movies, TV shows & Live sports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Amazon Ember', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #0f171e;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to bottom, rgba(15, 23, 30, 0.98), rgba(15, 23, 30, 0.95));
+            padding: 0 48px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .prime-logo {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.2s;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a:hover {
+            color: #00a8e1;
+            transform: translateY(-1px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00a8e1, #00d4ff);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .try-free {
+            background: linear-gradient(135deg, #00a8e1, #0096cc);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 168, 225, 0.4);
+        }
+
+        .try-free:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 168, 225, 0.6);
+        }
+
+        .user-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .user-icon:hover {
+            background: rgba(0, 168, 225, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Hero Section - MASSIVE & BEAUTIFUL */
+        .hero {
+            margin-top: 70px;
+            position: relative;
+            height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, 
+                rgba(15, 23, 30, 0.2) 0%, 
+                rgba(15, 23, 30, 0.6) 50%,
+                rgba(15, 23, 30, 0.95) 100%),
+                url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(15, 23, 30, 0.7) 100%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1100px;
+            padding: 60px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 28px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(0, 168, 225, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 26px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 48px;
+            font-weight: 300;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-cta {
+            background: linear-gradient(135deg, #0f79af, #00a8e1);
+            color: #fff;
+            border: none;
+            padding: 22px 56px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 8px 30px rgba(15, 121, 175, 0.5);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(15, 121, 175, 0.7);
+        }
+
+        .hero-note {
+            margin-top: 28px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 100px 48px;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .see-more {
+            color: #5eb3d6;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .see-more:hover {
+            color: #7cc4e0;
+            transform: translateX(5px);
+        }
+
+        /* Scrollable Content Row */
+        .content-row {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            padding-bottom: 24px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 168, 225, 0.4) transparent;
+        }
+
+        .content-row::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .content-row::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+
+        .content-row::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #00a8e1, #0096cc);
+            border-radius: 5px;
+        }
+
+        .content-row::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, #0096cc, #007ea8);
+        }
+
+        .content-card {
+            min-width: 340px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .content-card:hover {
+            transform: scale(1.08) translateY(-10px);
+            z-index: 10;
+        }
+
+        .card-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #1a2632 0%, #243447 100%);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-image img {
+            height: 220px;
+            width: 400px;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .content-card:hover .card-image {
+            box-shadow: 0 16px 48px rgba(0, 168, 225, 0.4);
+        }
+
+        .content-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .prime-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: linear-gradient(135deg, #00a8e1, #0096cc);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 168, 225, 0.5);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .content-card:hover .play-overlay {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 20px solid #0f171e;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 5px;
+        }
+
+        .card-info {
+            margin-top: 16px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .card-meta {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .rating {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        /* Categories Section */
+        .categories {
+            background: linear-gradient(180deg, rgba(0, 168, 225, 0.1) 0%, transparent 100%);
+            padding: 100px 48px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            margin-top: 50px;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px 28px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 168, 225, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .category-card:hover::before {
+            left: 100%;
+        }
+
+        .category-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 168, 225, 0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 168, 225, 0.3);
+        }
+
+        .category-icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 12px rgba(0, 168, 225, 0.3));
+        }
+
+        .category-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .category-desc {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Featured Banner */
+        .featured-banner {
+            margin: 80px 48px;
+            padding: 80px;
+            background: linear-gradient(135deg, rgba(0, 168, 225, 0.2), rgba(15, 121, 175, 0.2)),
+                        url('https://images.unsplash.com/photo-1574267432644-f610b15e5960?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(15, 23, 30, 0.7), rgba(15, 23, 30, 0.5));
+        }
+
+        .featured-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-banner h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .featured-banner p {
+            font-size: 20px;
+            margin-bottom: 32px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .featured-btn {
+            background: #fff;
+            color: #0f171e;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .featured-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to bottom, #0a0e13, #050a0f);
+            padding: 80px 48px 40px;
+            border-top: 1px solid rgba(0, 168, 225, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            height: 32px;
+            margin-bottom: 40px;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #00a8e1;
+        }
+
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 14px;
+            transition: all 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: #00a8e1;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-legal a:hover {
+            color: #00a8e1;
+        }
+
+        .copyright {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 52px;
+            }
+
+            .content-card {
+                min-width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 24px;
+                height: 60px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                height: 80vh;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .hero-cta {
+                padding: 16px 36px;
+                font-size: 16px;
+            }
+
+            .content-section {
+                padding: 60px 24px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .content-card {
+                min-width: 260px;
+            }
+
+            .categories {
+                padding: 60px 24px;
+            }
+
+            .featured-banner {
+                margin: 40px 24px;
+                padding: 40px 24px;
+            }
+
+            .featured-banner h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-left">
+            <a href="#" class="logo-link">
+                <svg class="prime-logo" viewBox="0 0 150 35" fill="none">
+                    <text x="0" y="26" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#00A8E1">Prime Video</text>
+                </svg>
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="prime.html">Movies</a></li>
+                <li><a href="#">Channels</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">My Stuff</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <button class="try-free">Try Prime</button>
+            <div class="user-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - MASSIVE -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Prime Video</h1>
+            <p class="hero-subtitle">Watch the latest movies, TV shows, and award-winning Amazon Originals.<br>Stream anywhere, anytime.</p>
+            <button class="hero-cta">Start your 30-day free trial</button>
+            <p class="hero-note">Cancel anytime. Terms and conditions apply.</p>
+        </div>
+    </section>
+
+    <!-- Popular Movies -->
+    <section class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">Popular movies</h2>
+            <a href="#" class="see-more">See more →</a>
+        </div>
+        <div class="content-row">
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://m.media-amazon.com/images/M/MV5BNGIyOTQwMTgtNjdlMi00YWE4LTg4MTgtZjc2ODI0OGRlOWQzXkEyXkFqcGc@._V1_.jpg" alt="The Brutalist">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">The Brutalist</div>
+                    <div class="card-meta"><span class="rating">★ 8.2</span> • 2024 • Drama</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://m.media-amazon.com/images/M/MV5BNjMwYWMxNjYtY2I2NC00OWE0LTg4MmQtMmI5ZGI2NzU4ODhiXkEyXkFqcGc@._V1_.jpg" alt="Wicked" height="100px" width="200px">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Wicked</div>
+                    <div class="card-meta"><span class="rating">★ 7.8</span> • 2024 • Musical</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://m.media-amazon.com/images/M/MV5BZmIzMThjNTYtNjkwZi00NmM3LTliNGItZWIxYTUwMGU1YzM0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Gladiator II">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Gladiator II</div>
+                    <div class="card-meta"><span class="rating">★ 8.5</span> • 2024 • Action</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://m.media-amazon.com/images/S/pv-target-images/e23fa7e7c9df044fdeb8b65954ed4fafc2851095fc9dd2218deba5d6ce51a698.jpg" alt="Dune Part Two">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Dune: Part Two</div>
+                    <div class="card-meta"><span class="rating">★ 8.9</span> • 2024 • Sci-Fi</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1594908900066-3f47337549d8?w=800&q=80" alt="Action Movie">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Red Notice</div>
+                    <div class="card-meta"><span class="rating">★ 7.5</span> • 2024 • Thriller</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80" alt="Cinema">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">The Midnight Sky</div>
+                    <div class="card-meta"><span class="rating">★ 7.9</span> • 2024 • Drama</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TV Shows -->
+    <section class="content-section" style="background:rgba(15,23,30,0.5)">
+        <div class="section-header">
+            <h2 class="section-title">Amazon Originals & Exclusives</h2>
+            <a href="#" class="see-more">See more →</a>
+        </div>
+        <div class="content-row">
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=800&q=80" alt="LOTR">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">The Lord of the Rings</div>
+                    <div class="card-meta"><span class="rating">★ 9.1</span> • Season 2 • Fantasy</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=800&q=80" alt="The Boys">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">The Boys</div>
+                    <div class="card-meta"><span class="rating">★ 8.7</span> • Season 4 • Action</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1571847140471-1d7766e825ea?w=800&q=80" alt="Reacher">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Reacher</div>
+                    <div class="card-meta"><span class="rating">★ 8.9</span> • Season 3 • Thriller</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1574267432644-f610b15e5960?w=800&q=80" alt="Citadel">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Citadel</div>
+                    <div class="card-meta"><span class="rating">★ 8.3</span> • Season 1 • Spy</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&q=80" alt="Fallout">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Fallout</div>
+                    <div class="card-meta"><span class="rating">★ 8.6</span> • Season 1 • Sci-Fi</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80" alt="Jack Ryan">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Jack Ryan</div>
+                    <div class="card-meta"><span class="rating">★ 8.1</span> • Season 4 • Action</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Banner -->
+    <section class="featured-banner">
+        <div class="featured-content">
+            <h2>Experience cinema at home</h2>
+            <p>Watch on any device with 4K Ultra HD and immersive sound</p>
+            <button class="featured-btn">Learn More</button>
+        </div>
+    </section>
+
+    <!-- Trending Now -->
+    <section class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">Trending now</h2>
+            <a href="#" class="see-more">See more →</a>
+        </div>
+        <div class="content-row">
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1579566346927-c68383817a25?w=800&q=80" alt="Trending">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">The Marvelous Mrs. Maisel</div>
+                    <div class="card-meta"><span class="rating">★ 8.7</span> • Comedy • Drama</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80" alt="Movie">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">The Terminal List</div>
+                    <div class="card-meta"><span class="rating">★ 8.0</span> • Thriller</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=800&q=80" alt="Action">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Tom Clancy's Without Remorse</div>
+                    <div class="card-meta"><span class="rating">★ 7.8</span> • Action</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=800&q=80" alt="Drama">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">The Wheel of Time</div>
+                    <div class="card-meta"><span class="rating">★ 8.4</span> • Fantasy</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80" alt="Cinema">
+                    <div class="prime-badge">Prime</div>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">Upload</div>
+                    <div class="card-meta"><span class="rating">★ 8.2</span> • Sci-Fi • Comedy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <h2 class="section-title" style="text-align:center">Explore by category</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon">🎬</div>
+                <h3 class="category-title">Movies</h3>
+                <p class="category-desc">Blockbusters, classics, and everything in between</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">📺</div>
+                <h3 class="category-title">TV Shows</h3>
+                <p class="category-desc">Binge-worthy series and originals</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">⚽</div>
+                <h3 class="category-title">Sports</h3>
+                <p class="category-desc">Live games and sports content</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🎭</div>
+                <h3 class="category-title">Kids</h3>
+                <p class="category-desc">Family-friendly entertainment</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🎵</div>
+                <h3 class="category-title">Music & Concerts</h3>
+                <p class="category-desc">Live performances and music documentaries</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🌍</div>
+                <h3 class="category-title">Documentaries</h3>
+                <p class="category-desc">Real stories, real people</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <svg class="footer-logo" viewBox="0 0 150 30" fill="none">
+                <text x="0" y="23" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#00A8E1">Prime Video</text>
+            </svg>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Prime Video</h4>
+                    <a href="#">All videos</a>
+                    <a href="#">Your benefits</a>
+                    <a href="#">Prime Video channels</a>
+                    <a href="#">Watch anywhere</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Features</h4>
+                    <a href="#">4K Ultra HD</a>
+                    <a href="#">Download & go</a>
+                    <a href="#">Multi-device streaming</a>
+                    <a href="#">Offline viewing</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <a href="#">Help center</a>
+                    <a href="#">Contact us</a>
+                    <a href="#">Feedback</a>
+                    <a href="#">Accessibility</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <a href="#">Terms of use</a>
+                    <a href="#">Privacy policy</a>
+                    <a href="#">Cookie preferences</a>
+                    <a href="#">Ad choices</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <a href="#">Terms and Privacy Notice</a>
+                    <a href="#">Send us feedback</a>
+                    <a href="#">Help</a>
+                    <a href="#">Cookie Preferences</a>
+                </div>
+                <p class="copyright">© 1996-2025, Amazon.com, Inc. or its affiliates</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
